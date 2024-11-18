@@ -1,0 +1,22 @@
+a			b
+5			
+2		
+7
+1
+6
+3
+9
+4
+8
+
+Pousser les deux premiers nombres dans la stack b sans rien verifier
+
+a			b	
+7			5
+1			2
+6
+3
+9
+4
+8
+
