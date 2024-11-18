@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:44:21 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/18 02:41:29 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/18 21:42:35 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ t_stack	*init_stack(void)
 	return (stack);
 }
 
+void	update_position(t_stack *stack)
+{
+	t_node	*current;
+
+	current = stack->top;
+	while (current != NULL)
+	{
+		current->pose = current->prev->pose + 1;
+		current = current->next;
+	}
+}
+
 void	push_stack(t_stack *stack, int value)
 {
 	t_node	*new_node;
@@ -39,11 +51,16 @@ void	push_stack(t_stack *stack, int value)
 	new_node->target_node = NULL;
 	new_node->cost = 0;
 	if (stack->top != NULL)
+	{
 		stack->top->prev = new_node;
+		update_position(stack);
+	}
 	stack->top = new_node;
+	stack->top->pose = 1;
 	if (stack->bottom == NULL)
 		stack->bottom = new_node;
 	stack->size++;
+	stack->median = stack->size / 2;
 }
 
 t_stack	*fill_stack(int ac, char **av)
@@ -76,9 +93,10 @@ void	print_stack(t_stack **stack)
 
 	current = (*stack)->top;
 	i = 1;
+	ft_printf("Median : %d\n", (*stack)->median);
 	while (current)
 	{
-		ft_printf("%d : %d\n", i, current->value);
+		ft_printf("%d : %d\n", current->pose, current->value);
 		current = current->next;
 		i++;
 	}

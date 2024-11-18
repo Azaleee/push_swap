@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 01:28:44 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/18 00:45:00 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/18 21:06:05 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,13 @@ int	main(int ac, char **av)
 	check_input(ac, av);
 	a = fill_stack(ac, av);
 	b = init_stack();
+	ft_printf("--------- Init list ---------\n");
 	print_stack(&a);
 	if (stack_is_sorted(&a) == 0)
 	{
 		check_and_sort(&a, &b);
 	}
-	print_stack(&a);
-	print_stack(&b);
+	//print_stack(&a);
+	//print_stack(&b);
 	return (0);
 }

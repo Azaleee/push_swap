@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:36:56 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/18 02:40:21 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/18 21:43:13 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_node
 {
 	int				value;
 	int				cost;
+	int				pose;
 	struct s_node	*target_node;
 	struct s_node	*next;
 	struct s_node	*prev;
@@ -58,6 +59,7 @@ void	print_stack(t_stack **stack);
 void	push_stack(t_stack *stack, int value);
 t_stack	*init_stack(void);
 t_stack	*fill_stack(int ac, char **av);
+void	update_position(t_stack *stack);
 
 void	check_input(int ac, char **av);
 int		is_num(const char *str);
@@ -66,9 +68,9 @@ void	exit_error(void);
 
 void	three_sort(t_stack **a);
 void	turk_algo(t_stack **a, t_stack **b);
-void	set_target_node(t_stack **a, t_stack **b);
-t_node	*best_target_node(t_node *a, t_stack **b);
-t_node	*find_max_number(t_stack **b);
+void	set_target_node(t_node *b, t_stack **a);
+t_node	*best_target_node(t_node *b, t_stack **a);
+t_node	*find_min_number(t_stack **a);
 
 int		stack_is_sorted(t_stack **stack);
 
