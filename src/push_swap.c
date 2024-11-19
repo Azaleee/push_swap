@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:44:21 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/18 21:42:35 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/20 00:16:13 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,21 @@ t_stack	*init_stack(void)
 	stack->bottom = NULL;
 	stack->size = 0;
 	stack->median = 0;
+	stack->min = NULL;
 	return (stack);
 }
 
 void	update_position(t_stack *stack)
 {
 	t_node	*current;
+	int		i;
 
+	stack->median = stack->size / 2;
 	current = stack->top;
+	i = 1;
 	while (current != NULL)
 	{
-		current->pose = current->prev->pose + 1;
+		current->pose = i++;
 		current = current->next;
 	}
 }
@@ -51,14 +55,14 @@ void	push_stack(t_stack *stack, int value)
 	new_node->target_node = NULL;
 	new_node->cost = 0;
 	if (stack->top != NULL)
-	{
 		stack->top->prev = new_node;
-		update_position(stack);
-	}
 	stack->top = new_node;
-	stack->top->pose = 1;
+	stack->min = NULL;
+	stack->top->pose = 0;
 	if (stack->bottom == NULL)
 		stack->bottom = new_node;
+	if (stack->top != NULL)
+		update_position(stack);
 	stack->size++;
 	stack->median = stack->size / 2;
 }
@@ -86,19 +90,38 @@ t_stack	*fill_stack(int ac, char **av)
 	return (stack);
 }
 
-void	print_stack(t_stack **stack)
+void	print_stack(t_stack **a, t_stack **b)
 {
-	t_node	*current;
+	t_node	*current_a;
+	t_node	*current_b;
 	int		i;
 
-	current = (*stack)->top;
+	current_a = (*a)->top;
+	current_b = (*b)->top;
+	if (current_b)
 	i = 1;
-	ft_printf("Median : %d\n", (*stack)->median);
-	while (current)
+	ft_printf("=================================");
+	ft_printf("\nMedian : %d -- Size : %d Top : %d Bottom : %d Min : %d\n", (*a)->median, (*a)->size, (*a)->top->value, (*a)->bottom->value, (*a)->min->value);
+	while (current_a)
 	{
-		ft_printf("%d : %d\n", current->pose, current->value);
-		current = current->next;
+		ft_printf("%d : (%p) %d next -> (%p) prev -> (%p)\n", current_a->pose, current_a, current_a->value, current_a->next, current_a->prev);
+		current_a = current_a->next;
 		i++;
 	}
+	ft_printf("\n---------------------------------\n");
+	if (current_b)
+	{
+		if ((*b)->top && (*b)->bottom)
+			ft_printf("\nMedian : %d -- Size : %d Top : %d Bottom : %d\n", (*b)->median, (*b)->size, (*b)->top->value, (*b)->bottom->value);
+		else
+			ft_printf("\nMedian : %d -- Size : %d Top : NULL Bottom : NULL\n", (*b)->median, (*b)->size);
+		while (current_b)
+		{
+			ft_printf("%d : (%p) %d next -> (%p) prev -> (%p)\n", current_b->pose, current_b, current_b->value, current_b->next, current_b->prev);
+			current_b = current_b->next;
+			i++;
+		}
+	}
+	ft_printf("=================================\n\n\n\n");
 	ft_printf("\n");
 }

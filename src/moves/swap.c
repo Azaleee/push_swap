@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 19:46:47 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/17 20:42:16 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/19 01:51:08 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	swap(t_stack **stack)
 	(*stack)->top = second;
 	if ((*stack)->size == 2)
 		((*stack)->bottom = first);
+	update_position((*stack));
 }
 
 void	sa(t_stack **a)

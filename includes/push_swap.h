@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:36:56 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/18 21:43:13 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/19 18:31:45 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ typedef struct s_stack
 {
 	t_node	*top;
 	t_node	*bottom;
-	t_node	*median;
+	t_node	*min;
+	int		median;
 	int		size;
 }			t_stack;
 
@@ -55,11 +56,12 @@ void	rra(t_stack **a);
 void	rrb(t_stack **b);
 void	rrr(t_stack **a, t_stack **b);
 
-void	print_stack(t_stack **stack);
+void	print_stack(t_stack **a, t_stack **b);
 void	push_stack(t_stack *stack, int value);
 t_stack	*init_stack(void);
 t_stack	*fill_stack(int ac, char **av);
 void	update_position(t_stack *stack);
+void	calculate_cost(t_node *b, t_stack **a, int median_of_b);
 
 void	check_input(int ac, char **av);
 int		is_num(const char *str);
@@ -71,6 +73,7 @@ void	turk_algo(t_stack **a, t_stack **b);
 void	set_target_node(t_node *b, t_stack **a);
 t_node	*best_target_node(t_node *b, t_stack **a);
 t_node	*find_min_number(t_stack **a);
+void	print_target_node(t_stack **a);
 
 int		stack_is_sorted(t_stack **stack);
 

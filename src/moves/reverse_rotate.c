@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 21:36:19 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/12 23:13:01 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/19 01:49:41 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	reverse_rotate(t_stack **stack)
 	temp->next = (*stack)->top;
 	(*stack)->top->prev = temp;
 	(*stack)->top = temp;
+	update_position((*stack));
 }
 
 void	rra(t_stack **a)
