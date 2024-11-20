@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:44:21 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/20 00:16:13 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/20 01:04:39 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,18 +98,20 @@ void	print_stack(t_stack **a, t_stack **b)
 
 	current_a = (*a)->top;
 	current_b = (*b)->top;
-	if (current_b)
 	i = 1;
-	ft_printf("=================================");
-	ft_printf("\nMedian : %d -- Size : %d Top : %d Bottom : %d Min : %d\n", (*a)->median, (*a)->size, (*a)->top->value, (*a)->bottom->value, (*a)->min->value);
-	while (current_a)
+	if (current_a != NULL)
 	{
-		ft_printf("%d : (%p) %d next -> (%p) prev -> (%p)\n", current_a->pose, current_a, current_a->value, current_a->next, current_a->prev);
-		current_a = current_a->next;
-		i++;
+		ft_printf("=================================");
+		ft_printf("\nMedian : %d -- Size : %d Top : %d Bottom : %d Min : %d\n", (*a)->median, (*a)->size, (*a)->top->value, (*a)->bottom->value, (*a)->min->value);
+		while (current_a)
+		{
+			ft_printf("%d : (%p) %d next -> (%p) prev -> (%p)\n", current_a->pose, current_a, current_a->value, current_a->next, current_a->prev);
+			current_a = current_a->next;
+			i++;
+		}
 	}
 	ft_printf("\n---------------------------------\n");
-	if (current_b)
+	if (current_b != NULL)
 	{
 		if ((*b)->top && (*b)->bottom)
 			ft_printf("\nMedian : %d -- Size : %d Top : %d Bottom : %d\n", (*b)->median, (*b)->size, (*b)->top->value, (*b)->bottom->value);

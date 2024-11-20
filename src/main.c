@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 01:28:44 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/20 00:19:41 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/20 01:28:49 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int ac, char **av)
 	b = init_stack();
 	if (stack_is_sorted(&a) == 0)
 		check_and_sort(&a, &b);
-	//print_stack(&a, &b);
+	//ft_printf("dd");
+	print_stack(&a, &b);
 	return (0);
 }

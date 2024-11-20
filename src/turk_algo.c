@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 21:29:16 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/20 00:19:28 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/20 01:22:39 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	calculate_cost(t_node *b, t_stack **a, int median_of_b)
 		b->cost = 0;
 	}
 	if (b->target_node->pose > (*a)->median + 1)
-		b->target_node->cost = b->target_node->pose - ((*a)->median + 1);
+		b->target_node->cost = (*a)->size - b->target_node->pose + 1;
 	else if (b->target_node->pose <= (*a)->median + 1)
 		b->target_node->cost = b->target_node->pose - 1;
 
@@ -89,10 +89,17 @@ void	push_b_to_a(t_stack **a, t_stack **b, t_node *current, t_node *target)
 	int	move_for_b;
 	int	move_for_a;
 
-
 	if (target->cost + current->cost == 0)
 		return (pa(a, b));
+	move_for_b = 0;
 	move_for_a = target->cost;
+	// if (move_for_a > 0 && move_for_b > 0) {
+	// 	while (move_for_a > 0 && move_for_b > 0) {
+	// 		rr(a, b);
+	// 		move_for_a--;
+	// 		move_for_b--;
+	// 	}
+	// }
 	if (target->pose > (*a)->median + 1)
 	{
 		while (move_for_a-- != 0)
@@ -158,10 +165,13 @@ void	turk_algo(t_stack **a, t_stack **b)
 	{
 		set_target_node((*b)->top, a);
 		calculate_cost((*b)->top, a, (*b)->median);
+		//ft_printf("Push b -> a: Node b = (%d) %d, Target a = (%d) %d ; cost -> %d\n", 
+                  //(*b)->top->pose, (*b)->top->value, (*b)->top->target_node->pose ,(*b)->top->target_node->value, (*b)->top->target_node->cost);
 		push_b_to_a(a, b, (*b)->top, (*b)->top->target_node);
 	}
 	if (stack_is_sorted(a) == 0)
 	{
+		//ft_printf("Final Rotate\n");
 		(*a)->min = find_min_number(a);
 		//print_stack(a, b);
 		final_rotate(a);
