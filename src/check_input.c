@@ -6,11 +6,17 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 15:33:05 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/09 19:14:39 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/21 18:36:48 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+void	exit_error(void)
+{
+	write(2, "Error\n", 6);
+	exit(EXIT_FAILURE);
+}
 
 int	is_num(const char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:54:09 by mosmont           #+#    #+#             */
-/*   Updated: 2024/10/23 12:05:06 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/21 18:35:21 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_atoi(const char *str)
 	int	sign;
 
 	result = 0;
-		sign = 1;
+	sign = 1;
 	while (ft_isspace(*str))
 		str++;
 	if (*str == '-' || *str == '+')

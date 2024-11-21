@@ -5,128 +5,143 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 22:44:21 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/21 03:11:26 by mosmont          ###   ########.fr       */
+/*   Created: 2024/11/17 21:29:16 by mosmont           #+#    #+#             */
+/*   Updated: 2024/11/21 19:12:52 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-t_stack	*init_stack(void)
-{
-	t_stack	*stack;
+// Pousser les deux premiers noeuds de stack a dans b tant que a n'est pas 3
+// Tant que la taille de n'est pas de 3
+	// Set les target node de la list a
 
-	stack = malloc(sizeof(t_stack));
-	if (stack == NULL)
-		return (NULL);
-	stack->top = NULL;
-	stack->bottom = NULL;
-	stack->size = 0;
-	stack->median = 0;
-	stack->min = NULL;
-	return (stack);
-}
-
-void	update_position(t_stack *stack)
+void	set_target_node(t_stack **b, t_stack **a)
 {
 	t_node	*current;
-	int		i;
 
-	stack->median = stack->size / 2;
-	current = stack->top;
-	i = 1;
+	current = (*b)->top;
 	while (current != NULL)
 	{
-		current->pose = i++;
+		current->target_node = best_target_node(current, a);
+		if (current->target_node == NULL)
+			current->target_node = find_min_number(a);
 		current = current->next;
 	}
 }
 
-void	push_stack(t_stack *stack, int value)
+void	calculate_cost(t_stack **b, t_stack **a)
 {
-	t_node	*new_node;
+	t_node	*current;
+	int		common_move;
 
-	new_node = malloc(sizeof(t_node));
-	if (new_node == NULL)
-		return ;
-	new_node->value = value;
-	new_node->next = stack->top;
-	new_node->prev = NULL;
-	new_node->target_node = NULL;
-	new_node->cost_a = 0;
-	new_node->cost_b = 0;
-	new_node->all_cost = 0;
-	if (stack->top != NULL)
-		stack->top->prev = new_node;
-	stack->top = new_node;
-	stack->min = NULL;
-	stack->top->pose = 0;
-	if (stack->bottom == NULL)
-		stack->bottom = new_node;
-	if (stack->top != NULL)
-		update_position(stack);
-	stack->size++;
-	stack->cheapest = NULL;
-	stack->median = stack->size / 2;
+	current = (*b)->top;
+	while (current != NULL)
+	{
+		if (current->target_node->pose > (*a)->median + 1)
+			current->cost_a = -((*a)->size - current->target_node->pose + 1);
+		else if (current->target_node->pose <= (*a)->median + 1)
+			current->cost_a = current->target_node->pose - 1;
+		if (current->pose > (*b)->median + 1)
+			current->cost_b = -((*b)->size - current->pose + 1);
+		else if (current->pose <= (*b)->median + 1)
+			current->cost_b = current->pose - 1;
+		current->all_cost = c_common_move(current->cost_a, current->cost_b);
+		current = current->next;
+	}
 }
 
-t_stack	*fill_stack(int ac, char **av)
+void	push_b_to_a(t_stack **a, t_stack **b)
 {
-	int		i;
-	t_stack	*stack;
-
-	stack = init_stack();
-	if (ac == 2)
+	if ((*b)->cheapest->all_cost == 0)
+		return (pa(a, b));
+	//sync_rotate(a, b);
+	while ((*b)->cheapest->cost_a > 0 && (*b)->cheapest->cost_b > 0)
 	{
-		i = 0;
-		while (av[i])
-			i++;
-		while (--i >= 0)
-			push_stack(stack, ft_atoi(av[i]));
+		rr(a, b);
+		(*b)->cheapest->cost_a--;
+		(*b)->cheapest->cost_b--;
 	}
-	else
+	while ((*b)->cheapest->cost_a < 0 && (*b)->cheapest->cost_b < 0)
 	{
-		i = ac;
-		while (--i > 0)
-			push_stack(stack, ft_atoi(av[i]));
+		rrr(a, b);
+		(*b)->cheapest->cost_a++;
+		(*b)->cheapest->cost_b++;
 	}
-	return (stack);
+	while ((*b)->cheapest->cost_a > 0)
+	{
+		ra(a);
+		(*b)->cheapest->cost_a--;
+	}
+	while ((*b)->cheapest->cost_a < 0)
+	{
+		rra(a);
+		(*b)->cheapest->cost_a++;
+	}
+	while ((*b)->cheapest->cost_b > 0)
+	{
+		rb(b);
+		(*b)->cheapest->cost_b--;
+	}
+	while ((*b)->cheapest->cost_b < 0)
+	{
+		rrb(b);
+		(*b)->cheapest->cost_b++;
+	}
+	pa(a, b);
 }
 
-void	print_stack(t_stack **a, t_stack **b)
+void	final_rotate(t_stack **a)
 {
-	t_node	*current_a;
-	t_node	*current_b;
-	int		i;
+	int	move_for_a;
 
-	current_a = (*a)->top;
-	current_b = (*b)->top;
-	i = 1;
-	if (current_a != NULL)
+	if ((*a)->min->pose > (*a)->median + 1)
+		(*a)->min->all_cost = (*a)->size - (*a)->min->pose + 1;
+	else if ((*a)->min->pose <= (*a)->median + 1)
+		(*a)->min->all_cost = (*a)->min->pose - 1;
+	move_for_a = (*a)->min->all_cost;
+	if ((*a)->min->pose > (*a)->median + 1)
 	{
-		ft_printf("=================================");
-		ft_printf("\nMedian : %d -- Size : %d Top : %d Bottom : %d Min : %d\n", (*a)->median, (*a)->size, (*a)->top->value, (*a)->bottom->value);
-		while (current_a)
-		{
-			ft_printf("%d : (%p) %d next -> (%p) prev -> (%p)\n", current_a->pose, current_a, current_a->value, current_a->next, current_a->prev);
-			current_a = current_a->next;
-			i++;
-		}
+		while (move_for_a-- != 0)
+			rra(a);
 	}
-	ft_printf("\n---------------------------------\n");
-	if (current_b != NULL)
+	else if ((*a)->min->pose <= (*a)->median + 1)
 	{
-		if ((*b)->top && (*b)->bottom)
-			ft_printf("\nMedian : %d -- Size : %d Top : %d Bottom : %d Cheapest : %d -> %d\n", (*b)->median, (*b)->size, (*b)->top->value, (*b)->bottom->value, (*b)->cheapest->pose, (*b)->cheapest->target_node->pose);
-		else
-			ft_printf("\nMedian : %d -- Size : %d Top : NULL Bottom : NULL\n", (*b)->median, (*b)->size);
-		while (current_b)
-		{
-			ft_printf("%d : (%p) %d next -> (%p) prev -> (%p)\n", current_b->pose, current_b, current_b->value, current_b->next, current_b->prev);
-			current_b = current_b->next;
-			i++;
-		}
+		while (move_for_a-- != 0)
+			ra(a);
 	}
-	ft_printf("=================================\n\n\n\n");
-	ft_printf("\n");
+}
+
+// Push dans b
+// Trier la pile a
+// Update toutes les infos
+	// Set toutes les targets node
+	// Set tout les cout de push
+	// Choisir le noeud avec le moins de mouvement
+	// Refaire tout remonter en haut de la pile
+	// Push dans a
+// Si pas trier mettre lelment le plus petit en haut de la pile
+
+void	turk_algo(t_stack **a, t_stack **b)
+{
+	t_node	*best_node;
+	int		min_cost;
+	t_node	*current;
+
+	while ((*a)->size > 3)
+		pb(a, b);
+	three_sort(a);
+	while ((*b)->size > 0)
+	{
+		set_target_node(b, a);
+		calculate_cost(b, a);
+		check_cheapest_node(b);
+		push_b_to_a(a, b);
+	}
+	if (stack_is_sorted(a) == 0)
+	{
+		(*a)->min = find_min_number(a);
+		final_rotate(a);
+	}
+	//print_stack(a, b);
 }

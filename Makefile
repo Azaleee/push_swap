@@ -19,7 +19,7 @@ OBJ_DIR =		obj/
 MOVES_DIR =		moves/
 MOVES_FILES =	push.c swap.c rotate.c reverse_rotate.c
 
-SRC_FILES = main.c push_swap.c check_input.c push_swap_utils.c short_sort.c utils_sort.c turk_algo.c\
+SRC_FILES = main.c check_input.c push_swap_utils.c short_sort.c utils_sort.c push_swap.c init_func.c math_func.c debug.c \
 			$(addprefix $(MOVES_DIR), $(MOVES_FILES))
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

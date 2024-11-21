@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:36:56 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/21 03:10:52 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/21 18:56:35 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,12 @@ void	set_target_node(t_stack **b, t_stack **a);
 t_node	*best_target_node(t_node *b, t_stack **a);
 t_node	*find_min_number(t_stack **a);
 void	print_target_node(t_stack **a);
+void	check_cheapest_node(t_stack **b);
+int		c_common_move(int cost_a, int cost_b);
+void	sync_rotate(t_stack **a, t_stack **b);
+
+int		ft_abs(int number);
+int		ft_min(int a, int b);
 
 int		stack_is_sorted(t_stack **stack);
 
