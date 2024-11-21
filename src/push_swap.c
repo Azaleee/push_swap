@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:44:21 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/20 01:04:39 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/21 03:11:26 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ void	push_stack(t_stack *stack, int value)
 	new_node->next = stack->top;
 	new_node->prev = NULL;
 	new_node->target_node = NULL;
-	new_node->cost = 0;
+	new_node->cost_a = 0;
+	new_node->cost_b = 0;
+	new_node->all_cost = 0;
 	if (stack->top != NULL)
 		stack->top->prev = new_node;
 	stack->top = new_node;
@@ -64,6 +66,7 @@ void	push_stack(t_stack *stack, int value)
 	if (stack->top != NULL)
 		update_position(stack);
 	stack->size++;
+	stack->cheapest = NULL;
 	stack->median = stack->size / 2;
 }
 
@@ -102,7 +105,7 @@ void	print_stack(t_stack **a, t_stack **b)
 	if (current_a != NULL)
 	{
 		ft_printf("=================================");
-		ft_printf("\nMedian : %d -- Size : %d Top : %d Bottom : %d Min : %d\n", (*a)->median, (*a)->size, (*a)->top->value, (*a)->bottom->value, (*a)->min->value);
+		ft_printf("\nMedian : %d -- Size : %d Top : %d Bottom : %d Min : %d\n", (*a)->median, (*a)->size, (*a)->top->value, (*a)->bottom->value);
 		while (current_a)
 		{
 			ft_printf("%d : (%p) %d next -> (%p) prev -> (%p)\n", current_a->pose, current_a, current_a->value, current_a->next, current_a->prev);
@@ -114,7 +117,7 @@ void	print_stack(t_stack **a, t_stack **b)
 	if (current_b != NULL)
 	{
 		if ((*b)->top && (*b)->bottom)
-			ft_printf("\nMedian : %d -- Size : %d Top : %d Bottom : %d\n", (*b)->median, (*b)->size, (*b)->top->value, (*b)->bottom->value);
+			ft_printf("\nMedian : %d -- Size : %d Top : %d Bottom : %d Cheapest : %d -> %d\n", (*b)->median, (*b)->size, (*b)->top->value, (*b)->bottom->value, (*b)->cheapest->pose, (*b)->cheapest->target_node->pose);
 		else
 			ft_printf("\nMedian : %d -- Size : %d Top : NULL Bottom : NULL\n", (*b)->median, (*b)->size);
 		while (current_b)

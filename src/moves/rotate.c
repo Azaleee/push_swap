@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 21:36:19 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/19 01:50:44 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/21 04:23:55 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	rr(t_stack **a, t_stack **b)
 {
 	rotate(a);
 	rotate(b);
+	ft_printf("rr\n");
 }

@@ -17,7 +17,7 @@ def generate_unique_numbers(count, min_value, max_value):
 
 # Exemple d'utilisation
 try:
-    result = generate_unique_numbers(30, 1, 2000000000)  # Génère 10 nombres uniques entre 1 et 100
+    result = generate_unique_numbers(100, 1, 123456)  # Génère 10 nombres uniques entre 1 et 100
     print(result)
 except ValueError as e:
     print(e)

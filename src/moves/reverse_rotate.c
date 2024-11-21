@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 21:36:19 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/19 01:49:41 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/21 04:23:17 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,5 @@ void	rrr(t_stack **a, t_stack **b)
 {
 	reverse_rotate(a);
 	reverse_rotate(b);
+	ft_printf("rrr\n");
 }

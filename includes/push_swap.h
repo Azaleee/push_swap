@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:36:56 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/19 18:31:45 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/21 03:10:52 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@
 typedef struct s_node
 {
 	int				value;
-	int				cost;
+	int				cost_a;
+	int				cost_b;
+	int				all_cost;
 	int				pose;
 	struct s_node	*target_node;
 	struct s_node	*next;
@@ -36,6 +38,7 @@ typedef struct s_stack
 	t_node	*top;
 	t_node	*bottom;
 	t_node	*min;
+	t_node	*cheapest;
 	int		median;
 	int		size;
 }			t_stack;
@@ -61,7 +64,7 @@ void	push_stack(t_stack *stack, int value);
 t_stack	*init_stack(void);
 t_stack	*fill_stack(int ac, char **av);
 void	update_position(t_stack *stack);
-void	calculate_cost(t_node *b, t_stack **a, int median_of_b);
+void	calculate_cost(t_stack **b, t_stack **a);
 
 void	check_input(int ac, char **av);
 int		is_num(const char *str);
@@ -70,7 +73,7 @@ void	exit_error(void);
 
 void	three_sort(t_stack **a);
 void	turk_algo(t_stack **a, t_stack **b);
-void	set_target_node(t_node *b, t_stack **a);
+void	set_target_node(t_stack **b, t_stack **a);
 t_node	*best_target_node(t_node *b, t_stack **a);
 t_node	*find_min_number(t_stack **a);
 void	print_target_node(t_stack **a);
