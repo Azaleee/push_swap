@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 21:29:16 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/22 15:46:14 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/22 21:58:14 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void	calculate_cost(t_stack **b, t_stack **a)
 	current = (*b)->top;
 	while (current != NULL)
 	{
-		if (current->target_node->pose > (*a)->median + 1)
+		if (current->target_node->pose > (*a)->median)
 			current->cost_a = -((*a)->size - current->target_node->pose + 1);
-		else if (current->target_node->pose <= (*a)->median + 1)
+		else if (current->target_node->pose <= (*a)->median)
 			current->cost_a = current->target_node->pose - 1;
-		if (current->pose > (*b)->median + 1)
+		if (current->pose > (*b)->median)
 			current->cost_b = -((*b)->size - current->pose + 1);
-		else if (current->pose <= (*b)->median + 1)
+		else if (current->pose <= (*b)->median)
 			current->cost_b = current->pose - 1;
 		current->all_cost = c_common_move(current->cost_a, current->cost_b);
 		current = current->next;
@@ -82,17 +82,17 @@ void	final_rotate(t_stack **a)
 {
 	int	move_for_a;
 
-	if ((*a)->min->pose > (*a)->median + 1)
+	if ((*a)->min->pose > (*a)->median)
 		(*a)->min->all_cost = (*a)->size - (*a)->min->pose + 1;
-	else if ((*a)->min->pose <= (*a)->median + 1)
+	else if ((*a)->min->pose <= (*a)->median)
 		(*a)->min->all_cost = (*a)->min->pose - 1;
 	move_for_a = (*a)->min->all_cost;
-	if ((*a)->min->pose > (*a)->median + 1)
+	if ((*a)->min->pose > (*a)->median)
 	{
 		while (move_for_a-- != 0)
 			rra(a);
 	}
-	else if ((*a)->min->pose <= (*a)->median + 1)
+	else if ((*a)->min->pose <= (*a)->median)
 	{
 		while (move_for_a-- != 0)
 			ra(a);
@@ -109,7 +109,7 @@ void	final_rotate(t_stack **a)
 	// Push dans a
 // Si pas trier mettre lelment le plus petit en haut de la pile
 
-void	turk_algo(t_stack **a, t_stack **b)
+void	push_swap(t_stack **a, t_stack **b)
 {
 	while ((*a)->size > 3)
 		pb(a, b);

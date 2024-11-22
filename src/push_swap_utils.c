@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 16:16:02 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/22 15:45:52 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/22 22:05:12 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	check_cheapest_node(t_stack **b)
 	min_cost = INT_MAX;
 	while (current)
 	{
-		if (min_cost > current->all_cost)
+		if (min_cost > current->all_cost || (min_cost == current->all_cost
+				&& ft_abs((*b)->cheapest->value) > ft_abs(current->value)))
 		{
 			min_cost = current->all_cost;
 			(*b)->cheapest = current;

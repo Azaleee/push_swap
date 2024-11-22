@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:36:56 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/22 16:22:36 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/22 21:53:14 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int		is_num(const char *str);
 void	exit_error(void);
 
 void	three_sort(t_stack **a);
-void	turk_algo(t_stack **a, t_stack **b);
+void	push_swap(t_stack **a, t_stack **b);
 void	set_target_node(t_stack **b, t_stack **a);
 t_node	*best_target_node(t_node *b, t_stack **a);
 t_node	*find_min_number(t_stack **a);

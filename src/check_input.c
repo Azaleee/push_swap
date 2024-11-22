@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 15:33:05 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/22 17:15:33 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/22 21:42:30 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	is_num(const char *str)
 	i = 0;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
+	if (!str[i])
+		return (0);
 	while (str[i] != '\0')
 	{
 		if (ft_isdigit(str[i]) == 0)
