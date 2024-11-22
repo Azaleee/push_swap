@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 21:29:16 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/21 19:12:52 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/22 15:46:14 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	set_target_node(t_stack **b, t_stack **a)
 void	calculate_cost(t_stack **b, t_stack **a)
 {
 	t_node	*current;
-	int		common_move;
 
 	current = (*b)->top;
 	while (current != NULL)
@@ -55,19 +54,7 @@ void	push_b_to_a(t_stack **a, t_stack **b)
 {
 	if ((*b)->cheapest->all_cost == 0)
 		return (pa(a, b));
-	//sync_rotate(a, b);
-	while ((*b)->cheapest->cost_a > 0 && (*b)->cheapest->cost_b > 0)
-	{
-		rr(a, b);
-		(*b)->cheapest->cost_a--;
-		(*b)->cheapest->cost_b--;
-	}
-	while ((*b)->cheapest->cost_a < 0 && (*b)->cheapest->cost_b < 0)
-	{
-		rrr(a, b);
-		(*b)->cheapest->cost_a++;
-		(*b)->cheapest->cost_b++;
-	}
+	sync_rotate(a, b);
 	while ((*b)->cheapest->cost_a > 0)
 	{
 		ra(a);
@@ -124,10 +111,6 @@ void	final_rotate(t_stack **a)
 
 void	turk_algo(t_stack **a, t_stack **b)
 {
-	t_node	*best_node;
-	int		min_cost;
-	t_node	*current;
-
 	while ((*a)->size > 3)
 		pb(a, b);
 	three_sort(a);
@@ -143,5 +126,4 @@ void	turk_algo(t_stack **a, t_stack **b)
 		(*a)->min = find_min_number(a);
 		final_rotate(a);
 	}
-	//print_stack(a, b);
 }

@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:01:12 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/08 23:35:06 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/22 17:13:28 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <string.h>
 # include <unistd.h>
 # include <limits.h>
-# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -60,6 +59,7 @@ char				*ft_strnstr(const char *haystack, const char *needle,
 						size_t len);
 int					ft_strncmp(const char *str1, const char *str2, size_t n);
 int					ft_atoi(const char *str);
+long				ft_atol(const char *str);
 char				*ft_itoa(int n);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
@@ -80,8 +80,6 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
-
-// PRINTF
 
 int					ft_printf(const char *hook, ...);
 size_t				ft_putchar(char c);

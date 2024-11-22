@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 16:16:02 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/21 18:59:51 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/22 15:45:52 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	check_cheapest_node(t_stack **b)
 {
 	t_node	*current;
-	t_node	*cheapest_node;
 	int		min_cost;
 
 	if ((*b) == NULL)
@@ -77,8 +76,8 @@ int	c_common_move(int cost_a, int cost_b)
 {
 	int	common_move;
 
-	if (cost_a < 0 && cost_b < 0
-		|| cost_a > 0 && cost_b > 0)
+	if ((cost_a < 0 && cost_b < 0)
+		|| (cost_a > 0 && cost_b > 0))
 	{
 		common_move = ft_min(ft_abs(cost_a), ft_abs(cost_b));
 		return (ft_abs(cost_a) + ft_abs(cost_b) - common_move);

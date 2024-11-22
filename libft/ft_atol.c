@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 13:49:56 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/22 17:22:40 by mosmont          ###   ########.fr       */
+/*   Created: 2024/11/22 17:08:49 by mosmont           #+#    #+#             */
+/*   Updated: 2024/11/22 17:09:25 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_stack **lst, void (*del)(void *))
+static int	ft_isspace(int c)
 {
-	t_list	*temp;
-	t_list	*current;
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r');
+}
 
-	current = *lst;
-	while (current != NULL)
+long	ft_atol(const char *str)
+{
+	long	result;
+	int		sign;
+
+	result = 0;
+	sign = 1;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		temp = current->next;
-		(*del)(current->content);
-		free(current);
-		current = temp;
+		if (*str == '-')
+			sign = -1;
+		str++;
 	}
-	*lst = NULL;
+	while (*str >= '0' && *str <= '9')
+		result = result * 10 + (*str++ - '0');
+	return (result * sign);
 }

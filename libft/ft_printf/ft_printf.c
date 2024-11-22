@@ -6,11 +6,12 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:17:05 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/08 23:34:21 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/22 16:21:35 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
+#include <stdarg.h>
 
 size_t	ft_putunbr(unsigned int nb)
 {

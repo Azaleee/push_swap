@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 15:33:05 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/21 18:36:48 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/22 17:15:33 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,12 @@ void	check_input(int ac, char **av)
 
 	i = 1;
 	if (ac == 2)
-	{
 		i = 0;
-	}
 	while (av[i])
 	{
-		if (is_num(av[i]) == 0)
-		{
+		if (is_num(av[i]) == 0
+			|| (ft_atol(av[i]) > INT_MAX || ft_atol(av[i]) < INT_MIN))
 			exit_error();
-		}
 		i++;
 	}
 	if (is_dup(ac, av) == 0)

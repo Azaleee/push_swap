@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 01:28:44 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/21 18:31:27 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/11/22 17:34:31 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,25 @@ void	check_and_sort(t_stack **a, t_stack **b)
 	}
 }
 
+void	ft_lstclear_stack(t_stack **stack)
+{
+	t_node	*temp;
+	t_node	*current;
+
+	current = (*stack)->top;
+	while (current != NULL)
+	{
+		temp = current->next;
+		free(current);
+		current = temp;
+	}
+	(*stack)->top = NULL;
+	(*stack)->bottom = NULL;
+	(*stack)->min = NULL;
+	(*stack)->cheapest = NULL;
+	(*stack)->size = 0;
+}
+
 int	main(int ac, char **av)
 {
 	t_stack	*a;
@@ -44,5 +63,6 @@ int	main(int ac, char **av)
 	b = init_stack();
 	if (stack_is_sorted(&a) == 0)
 		check_and_sort(&a, &b);
+	ft_lstclear_stack(&a);
 	return (0);
 }
