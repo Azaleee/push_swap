@@ -28,6 +28,16 @@ void	check_and_sort(t_stack **a, t_stack **b)
 	}
 }
 
+void	free_node(t_node *node)
+{
+	if (node == NULL)
+		return ;
+	if (node->target_node != NULL)
+		free(node->target_node);
+	else
+		free(node);
+}
+
 void	ft_lstclear_stack(t_stack **stack)
 {
 	t_node	*temp;
@@ -40,11 +50,8 @@ void	ft_lstclear_stack(t_stack **stack)
 		free(current);
 		current = temp;
 	}
-	(*stack)->top = NULL;
-	(*stack)->bottom = NULL;
-	(*stack)->min = NULL;
-	(*stack)->cheapest = NULL;
-	(*stack)->size = 0;
+	free(*stack);
+	*stack = NULL;
 }
 
 int	main(int ac, char **av)
@@ -52,17 +59,22 @@ int	main(int ac, char **av)
 	t_stack	*a;
 	t_stack	*b;
 
+	if (ac == 1)
+		return (0);
 	if (ac == 2)
 	{
 		av = ft_split(av[1], ' ');
 		if (av == NULL)
 			exit_error();
 	}
-	check_input(ac, av);
 	a = fill_stack(ac, av);
 	b = init_stack();
 	if (stack_is_sorted(&a) == 0)
 		check_and_sort(&a, &b);
 	ft_lstclear_stack(&a);
+	free(b);
+	b = NULL;
+	if (ac == 2)
+		free_av(av);
 	return (0);
 }

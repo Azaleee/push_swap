@@ -67,6 +67,7 @@ void	update_position(t_stack *stack);
 void	calculate_cost(t_stack **b, t_stack **a);
 
 void	check_input(int ac, char **av);
+void	free_av(char **av);
 int		is_num(const char *str);
 
 void	exit_error(void);

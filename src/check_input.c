@@ -56,6 +56,19 @@ int	is_dup(int ac, char **av)
 	return (1);
 }
 
+void	free_av(char **av)
+{
+	int	i;
+
+	i = 0;
+	while (av[i])
+	{
+		free(av[i]);
+		i++;
+	}
+	free(av);
+}
+
 void	check_input(int ac, char **av)
 {
 	int	i;
@@ -67,9 +80,17 @@ void	check_input(int ac, char **av)
 	{
 		if (is_num(av[i]) == 0
 			|| (ft_atol(av[i]) > INT_MAX || ft_atol(av[i]) < INT_MIN))
+		{
+			if (ac == 2)
+				free_av(av);
 			exit_error();
+		}
 		i++;
 	}
 	if (is_dup(ac, av) == 0)
+	{
+		if (ac == 2)
+			free_av(av);
 		exit_error();
+	}
 }
