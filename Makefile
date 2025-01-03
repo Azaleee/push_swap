@@ -1,7 +1,7 @@
 NAME = 			push_swap
 
 CC = 			cc
-#CFLAGS = 		-Wall -Wextra -Werror
+CFLAGS = 		-Wall -Wextra -Werror
 
 GREEN = 		\\033[0;32m
 YELLOW = 		\\033[0;33m
@@ -28,10 +28,6 @@ OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
 LIBFT = $(LIBFT_DIR)/libft.a
 
-# Compter le nombre total de fichiers sources pour le calcul de la barre de progression
-TOTAL_STEPS = $(words $(SRC))
-CURRENT_STEP = 0
-
 all: setup $(LIBFT) $(NAME)
 
 setup:
@@ -49,9 +45,6 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)/moves/
 	@$(CC) $(CFLAGS) -I $(INCLUDES) -I $(LIBFT_DIR) -o $@ -c $<
-	@$(eval CURRENT_STEP=$(shell echo $$(( $(CURRENT_STEP) + 1 ))))
-	@$(eval PROGRESS_BAR = $(shell echo $$(( $(CURRENT_STEP) * 100 / $(TOTAL_STEPS) )) ))
-	@echo "$(CYAN)[$(PROGRESS_BAR)%]$(RESET) Compiling $<"
 
 clean:
 	@rm -rf $(OBJ_DIR)
@@ -66,3 +59,5 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+.SILENT:

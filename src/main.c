@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 01:28:44 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/22 21:53:06 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/12/17 17:55:31 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ void	check_and_sort(t_stack **a, t_stack **b)
 	else if ((*a)->size == 3)
 		three_sort(a);
 	else if ((*a)->size > 3 && (*b)->size == 0)
-	{
 		push_swap(a, b);
-	}
 }
 
 void	free_node(t_node *node)

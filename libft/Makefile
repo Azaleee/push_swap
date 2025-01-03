@@ -60,9 +60,6 @@ SRC_BONUS = ft_lstnew.c \
 			ft_lstclear.c \
 			ft_lstiter.c \
 			ft_lstmap.c \
-
-TOTAL_STEPS = $(words $(SRC) $(SRC_BONUS))
-CURRENT_STEP = 0
 			
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
@@ -74,9 +71,6 @@ $(NAME): $(OBJ) $(OBJ_BONUS)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@$(eval CURRENT_STEP=$(shell echo $$(( $(CURRENT_STEP) + 1 ))))
-	@$(eval PROGRESS_BAR = $(shell echo $$(( $(CURRENT_STEP) * 100 / $(TOTAL_STEPS) )) ))
-	@echo "$(CYAN)[$(PROGRESS_BAR)%]$(RESET) Compiling $<"
 
 clean:
 	@$(RM) $(OBJ) $(OBJ_BONUS)

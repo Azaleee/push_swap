@@ -6,23 +6,23 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:24:06 by mosmont           #+#    #+#             */
-/*   Updated: 2024/11/22 15:46:31 by mosmont          ###   ########.fr       */
+/*   Updated: 2024/12/19 16:43:51 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	print_target_node(t_stack **a)
-{
-	t_node	*current;
+// void	print_target_node(t_stack **a)
+// {
+// 	t_node	*current;
 
-	current = (*a)->top;
-	while (current)
-	{
-		current = current->next;
-	}
-	ft_printf("\n");
-}
+// 	current = (*a)->top;
+// 	while (current)
+// 	{
+// 		current = current->next;
+// 	}
+// 	ft_printf("\n");
+// }
 
 // void	print_stack(t_stack **a, t_stack **b)
 // {
